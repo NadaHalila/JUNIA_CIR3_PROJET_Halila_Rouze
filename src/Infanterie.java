@@ -1,19 +1,25 @@
 import java.util.List;
 
 class Infanterie extends Unite  {
-    protected String type;
+    protected String TypeInfanterie;
 
-    public Infanterie(List<Unite> unites, String nom, int cout, String nom1, int cout1, String type) {
+    public Infanterie(List<Unite> unites, String nom, int cout, String nom1, int cout1, TypeInfanterie type) {
         super(unites, nom, cout, nom1, cout1);
-        this.type = type;
+        this.TypeInfanterie = String.valueOf(type);
     }
 
     @Override
     public String toString() {
         return "Infanterie{" +
-                "type='" + type + '\'' +
+                "type='" + TypeInfanterie + '\'' +
                 ", nom='" + nom + '\'' +
                 ", cout=" + cout +
                 '}';
     }
+}
+enum TypeInfanterie {
+    SOLDAT,
+    LOURD,
+    SPECIAL,
+    CHEF
 }

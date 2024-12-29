@@ -8,7 +8,7 @@ interface unite_type{
 
 public class Armee {
 
-     static Groupe creation_armee() {
+    static Groupe creation_armee() {
         List<Unite> New_army_groupe= new ArrayList<>() ;
         Scanner sc = new Scanner(System.in);
         System.out.print("Nom de l'armée : ");
@@ -24,41 +24,73 @@ public class Armee {
         String nom = sc.nextLine();
         System.out.print("le coût de l'uniter : ");
         int cout = sc.nextInt();
-         if (nb==1){
-             System.out.print("type de l'unite d'infanterie: ");
-             String type = sc.nextLine();
-             Infanterie new_Unite=new Infanterie(army_groupe.getUnites(),army_groupe.getNom(), army_groupe.getCout(), nom, cout,type);
-         }
-         if (nb==2){
-
-             System.out.print("type de l'unite de véhicule: \n 1- Attaque\n 2-Transport ");
-             int type = sc.nextInt();
-             if(type==1){
-                 Attaque new_Unite=new Attaque(army_groupe.getUnites(),army_groupe.getNom(), army_groupe.getCout(), nom, cout,"attaque")
+        if (army_groupe.getCout()-cout >=0){
+             if (nb==1){
+                 System.out.print("type de l'unite d'infanterie:  ");
+                 int i =1;
+                 for( TypeInfanterie type : TypeInfanterie.values()){
+                     System.out.println( i + "- Type : " + type);
+                     i++;
+                 }
+                 int index = sc.nextInt();
+                 Infanterie new_Unite=new Infanterie(army_groupe.getUnites(),army_groupe.getNom(), army_groupe.getCout(), nom, cout,TypeInfanterie.values()[index-1]);
+                 //System.out.println( new_Unite.toString());
+                 army_groupe.add_unite(new_Unite);
+                 System.out.println("Unité ajoutée : " + new_Unite);
+                 army_groupe.setCout(army_groupe.getCout()-new_Unite.getCout());
 
              }
-         }
+             if (nb==2){
+
+                 System.out.print("type de l'unite de vehicule:  \n");
+                 int i =1;
+                 for( TypeVehicule type : TypeVehicule.values()){
+                     System.out.println( i + "- Type : " + type);
+                     i++;
+                 }
+                 int index = sc.nextInt();
+                // creation de la classe en fonction du choix de type :
+                 TypeVehicule typeVehicule = TypeVehicule.values()[index - 1];
+                 Vehicule newUnite = typeVehicule.createInstance(army_groupe,nom, cout);
+                 army_groupe.add_unite(newUnite);
+                 System.out.println("Unité ajoutée : " + newUnite);
+             }
+        }
+        else{
+            System.out.println("le cout de l'uniter est elever ");
+        }
+         return army_groupe;
+    }
+    static void afficher_unite(Groupe army_groupe) {
+        System.out.println("Nom de group :"+army_groupe.getNom()+"\n"+
+                "cout de groupe : "+army_groupe.getCout());
+        for (int i=0; i<army_groupe.getUnites().size();i++){
+            System.out.println(army_groupe.getUnites().get(i));
+        }
     }
 
 
     public static void main(String[] args) {
-        System.out.println("Bienvenue dans l'éditeur de liste d'armée !"+'\n'+ "1- Crée un nouveau groupe d'armée" +'\n'+"entrer le chiffre correspond à l'action souhaiter: ");
-        Scanner sc = new Scanner(System.in);
-        int action = sc.nextInt();
-        if (action == 1) {
-            Groupe nouveau_armee=creation_armee();
-        }
+        int action;
+        do {
+            System.out.println("Bienvenue dans l'éditeur de liste d'armée !"+
+                    '\n'+ "1- Crée un nouveau groupe d'armée" +
+                    '\n'+ "0- arreter le programme " +
+                    '\n'+"entrer le chiffre correspond à l'action souhaiter: ");
+            Scanner sc = new Scanner(System.in);
+            action = sc.nextInt();
+            do{
+            if (action == 1) {
+                Groupe nouveau_armee=creation_armee();
+                nouveau_armee=ajout_unite(nouveau_armee,2);
+                afficher_unite(nouveau_armee);
+            }
+            }while(action!=0);
+
+        }while(action!=0);
 
 
 
-
-
-        //Unite U = new Unite("Boo",10000){};
-        //Infanterie I = new Infanterie("I_Boo",20,"type_1") {};
-
-        //System.out.println("Nom: "+I.getNom());
-        //System.out.println("Cout: "+I.getCout());
-        //System.out.println(I.toString());
 
 
     }
