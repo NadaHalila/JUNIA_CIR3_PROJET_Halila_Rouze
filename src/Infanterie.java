@@ -10,11 +10,11 @@ class Infanterie extends Unite  {
 
     @Override
     public String toString() {
-        return "Infanterie{" +
-                "type='" + TypeInfanterie + '\'' +
-                ", nom='" + nom + '\'' +
-                ", cout=" + cout +
-                '}';
+        return "Infanterie : " +
+                 TypeInfanterie + '-' +
+                 nom + '(' +
+                 cout +
+                ')';
     }
 }
 enum TypeInfanterie {

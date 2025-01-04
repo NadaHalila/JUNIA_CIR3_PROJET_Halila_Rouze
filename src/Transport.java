@@ -11,13 +11,11 @@ class Transport extends Vehicule  {
 
     @Override
     public String toString() {
-        return "Transport{" +
-                "poid=" + poid +
-                ", type='" + type + '\'' +
-                ", nom='" + nom + '\'' +
-                ", cout=" + cout +
-                ", nom='" + nom + '\'' +
-                ", cout=" + cout +
-                '}';
+        return "Transport : " +
+                 type + '-' +
+                 nom + '(' +
+                 cout + ',' +
+                 poid +
+                ')';
     }
 }

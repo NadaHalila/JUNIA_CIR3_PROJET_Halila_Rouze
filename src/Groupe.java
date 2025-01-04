@@ -14,6 +14,7 @@ public class Groupe {
         this.cout = cout;
     }
 
+
     public List<Unite> getUnites() {
         return unites;
     }
@@ -41,9 +42,11 @@ public class Groupe {
     public void add_unite(Unite unite) {
         unites.add(unite);
     }
+
     public void remove_unite_index(int index) {
         if (index >= 0 && index < unites.size()) {
             unites.remove(index);
+
         }
         else {
             throw new IndexOutOfBoundsException();
