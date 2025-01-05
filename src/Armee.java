@@ -93,9 +93,8 @@ public class Armee {
         do {
             System.out.println("1- Crée un nouveau groupe d'armée" + '\n'
                              + "2- afficher le contenu des armée" + '\n' +
-                             "3- ajouter une untié dans une armée " + '\n'
-                             + "4- modifier une unité" + '\n' +
-                            "5- supprime une untié ou une armée " +
+                             "3- ajouter une untié dans une armée " + '\n' +
+                            "4- supprime une untié ou une armée " +
                     '\n'+ "0- arreter le programme " +
                     '\n'+"entrer le chiffre correspond à l'action souhaiter: ");
             Scanner sc = new Scanner(System.in);
@@ -135,50 +134,9 @@ public class Armee {
                     uniter = scan.nextInt();
                     nouveau_armee=ajout_unite(nouveau_armee,uniter);
                 }
-                else if (action ==4){
-                    System.out.println("Que voulez vous modifiez ? " + '\n' +
-                            "1- modifiez le nom de l'armée " + '\n' +
-                            "2- modifiez le cout de l'armée " + '\n'+
-                            "3- modifiez les unitées" );
-                    Scanner modif= new Scanner(System.in);
-                    int modification =modif.nextInt();
-                    switch (modification) {
-                        case 1 :
-                            System.out.println("Comment voulez vous renomez votre armée ");
-                            Scanner nouveau_nom=new Scanner(System.in);
-                            String new_armee=nouveau_nom.nextLine();
-                            // enregistrer changement de nom
-                            break;
-                        case 2:
-                            System.out.println("quelle est la valeur du nouveau cout de l'armée ?");
-                            Scanner nouveau_cout=new Scanner(System.in);
-                            int new_cout=nouveau_cout.nextInt();
-                            // enregistrer changement cout
-                            break;
-                        case 3 :
-                            System.out.println("quelle unité voulez vous modifiez : ");
-                            for (int i=0; i<nouveau_armee.getUnites().size();i++){
-                                System.out.println(i+1 + "-" + nouveau_armee.getUnites().get(i));
-                            }
-                            Scanner modif_unite=new Scanner((System.in));
-                            int modification_unite=modif_unite.nextInt();
-                            switch (modification_unite){
-                                case 1 :
-                                    System.out.println("que souhaitez vous modifiez : " + '\n' +
-                                            "1- le nom " + '\n' +
-                                            "2- le cout " );
-                                    Scanner modif_unit1=new Scanner(System.in);
-                                    int modication_unit1=modif_unit1.nextInt();
-                                    // enregistrer modif
-                                    break;
-                            }
-
-                    }
 
 
-                }
-
-                else if (action  == 5 ){
+                else if (action  ==4  ){
 //                    System.out.println("quelle groupe souhaitez vous supprimer ? ");
 //                    for (int i = 0; i < armees.size(); i++) {
 //                        System.out.println((i+1) + ". " + armees.get(i).getNom());
