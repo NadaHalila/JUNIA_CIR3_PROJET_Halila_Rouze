@@ -15,10 +15,13 @@ public class Armee {
         String nom = sc.nextLine();
         System.out.print("Points maximum de l'armée : ");
         int pointsMax = sc.nextInt();
-        System.out.println("votre armee "+nom+" avec "+pointsMax+" points a été cree avec succes");
+        System.out.println(BLEU+"============================================================================"+RESET);
+        System.out.println("Votre armee "+VERT+nom+RESET+" avec "+VERT+pointsMax+RESET+" points a été cree avec succes");
+        System.out.println(BLEU+"============================================================================"+RESET);
 
         return new Groupe(New_army_groupe,nom,pointsMax);
     }
+
     static Groupe ajout_unite(Groupe army_groupe,int nb) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nom de l'unité : ");
@@ -36,7 +39,7 @@ public class Armee {
             System.out.print("Type de l'unite d'infanterie:   " + '\n');
             int i =1;
             for( TypeInfanterie type : TypeInfanterie.values()){
-                System.out.println( i + "- Type : " + type);
+                System.out.println( VERT+i+RESET+ "- Type : " + type);
                 i++;
             }
             int index = sc.nextInt();
@@ -52,7 +55,7 @@ public class Armee {
             System.out.print("type de l'unité de vehicule:  \n");
             int i =1;
             for( TypeVehicule type : TypeVehicule.values()){
-                System.out.println( i + "- Type : " + type);
+                System.out.println( VERT+i+RESET+ "- Type : " + type);
                 i++;
             }
             int index = sc.nextInt();
@@ -64,9 +67,11 @@ public class Armee {
         }
          return army_groupe;
     }
+
     static void afficher_unite(Groupe army_groupe) {
         System.out.println("Armée :"+army_groupe.getNom()+"\n"+
-                "Coût : "+army_groupe.getCout());
+                "Coût lors de la création : "+army_groupe.getCout_lors_de_creation()+"\n"+
+                "Coût restant: "+army_groupe.getCout());
         for (Unite unite : army_groupe.getUnites()) {
             if (unite instanceof Infanterie) {
                 Infanterie infanterie = (Infanterie) unite;
@@ -83,28 +88,34 @@ public class Armee {
             }
         }
     }
-
+    public static final String RESET = "\u001B[0m";  // Réinitialisation
+    public static final String ROUGE = "\u001B[31m"; // Rouge
+    public static final String VERT = "\u001B[32m";  // Vert
+    public static final String JAUNE = "\u001B[33m"; // Jaune
+    public static final String BLEU = "\u001B[34m";  // Bleu
 
 
     public static void main(String[] args) {
+
         int action;
         int uniter;
         int suppression;
         ArrayList<Groupe> armees = new ArrayList<>();
 
-        System.out.println("Bienvenue dans l'éditeur de liste d'armée !" + '\n' +
-        "pour commencer vous allez crée votre première armée " + '\n' +
-                "un conseil passez en mode pleine ecran cela rendra votre experience de jeu plus agréable !! ");
+        System.out.println(BLEU+"Bienvenue dans l'éditeur de liste d'armée !" + '\n' +
+        "Pour commencer vous allez crée votre première armée " + '\n' +
+                "Un conseil passez en mode pleine ecran cela rendra votre experience de jeu plus agréable !! "+RESET);
         Groupe nouveau_armee=creation_armee();
         armees.add(nouveau_armee);
-        System.out.println('\n' + "Que voulez vous faire maintenant ? ");
+
         do {
-            System.out.println("1- Crée un nouveau groupe d'armée" + '\n'
-                             + "2- afficher le contenu des armée" + '\n' +
-                             "3- ajouter une untié dans une armée " + '\n' +
-                            "4- supprimer une untié  " +
-                    '\n'+ "0- arreter le programme " +
-                    '\n'+"entrer le chiffre correspond à l'action souhaiter: ");
+            System.out.println('\n' + "Que voulez vous faire maintenant ? ");
+            System.out.println(VERT+"1-"+RESET +"Crée un nouveau groupe d'armée" + '\n'+
+                    VERT+"2-"+RESET +" afficher le contenu des armée" + '\n' +
+                    VERT+"3-"+RESET +"ajouter une untié dans une armée " + '\n' +
+                    VERT+"4-"+RESET +"supprimer une untié  " + '\n'+
+                    VERT+"0-"+RESET +" arreter le programme " + '\n'+
+                    VERT+"Entrer le chiffre correspond à l'action souhaiter: "+RESET);
             Scanner sc = new Scanner(System.in);
             action = sc.nextInt();
 
@@ -114,16 +125,17 @@ public class Armee {
             }
 
             else if (action ==2 ){
+                System.out.println(JAUNE+"Le contenue des armée");
                 for (int k=0; k< armees.size();k++){
                     afficher_unite(armees.get(k));
                 }
-
+                System.out.println(RESET);
             }
             else if (action ==3) {
                 System.out.println("A quelle armée voulez vous ajouter une unité ? ");
                 System.out.println("Liste des armées :");
                 for (int i = 0; i < armees.size(); i++) {
-                    System.out.println((i+1) + ". " + armees.get(i).getNom());
+                    System.out.println(VERT+(i+1)+RESET + ". " + armees.get(i).getNom());
                 }
                 Scanner sc1= new Scanner (System.in);
                 int choix_armee=sc1.nextInt();
@@ -136,37 +148,42 @@ public class Armee {
 
 
                     System.out.println("Quelle unité souhaitez vous ajouter : " + '\n'
-                    + "1 - Infantrie" + '\n'
-                    + "2 - vehicule");
+                    + VERT+"1"+RESET+ "- Infantrie" + '\n'
+                    + VERT+"2"+RESET+  "- vehicule");
                     Scanner scan = new Scanner (System.in);
                     uniter = scan.nextInt();
                     nouveau_armee=ajout_unite(armee_choisi,uniter);
                 }
 
 
-                else if (action  ==4  ){
+            else if (action  ==4  ){
                 System.out.println("A quelle armée voulez vous supprimer une unité ? ");
                 System.out.println("Liste des armées :");
                 for (int i = 0; i < armees.size(); i++) {
-                    System.out.println((i+1) + ". " + armees.get(i).getNom());
+                    System.out.println(VERT+(i+1)+RESET + ". " + armees.get(i).getNom());
                 }
                 Scanner armee_unit=new Scanner(System.in);
                 int armee_unite=armee_unit.nextInt()-1;
                 Groupe armee_choisi_supp= armees.get(armee_unite);
 
-                            System.out.println("Quelle unité souhaitez vous supprimer ? ");
-                            for (int i=0; i<armee_choisi_supp.getUnites().size();i++){
-                                System.out.println(i+1 + "-" + armee_choisi_supp.getUnites().get(i));
-                            }
-                            Scanner sca = new Scanner(System.in);
-                            int sup = sca.nextInt()-1;
-                            nouveau_armee.remove_unite_index(sup);
-                            System.out.println("unitée supprimer");
+                System.out.println("Quelle unité souhaitez vous supprimer ? ");
+                for (int i=0; i<armee_choisi_supp.getUnites().size();i++){
+                    System.out.println(VERT+(i+1)+RESET + "-" + armee_choisi_supp.getUnites().get(i));
+                }
+                Scanner sca = new Scanner(System.in);
+                int sup = sca.nextInt()-1;
+                nouveau_armee.remove_unite_index(sup);
+                System.out.println("unitée supprimer");
 
 
-                    }
+            }
 
-
+            if (action>4){
+                System.out.println(ROUGE+"l'action n'existe pas veuiller choisire une autre action"+RESET);
+            }
+            System.out.println(BLEU+"============================================================================"+RESET);
+            System.out.println(BLEU+"Retour au menu Principale"+RESET);
+            System.out.println(BLEU+"============================================================================"+RESET);
 
         }while(action!=0);
 

@@ -7,11 +7,13 @@ public class Groupe {
     private List<Unite> unites ;
     protected String nom;
     protected int cout;
+    protected int cout_lors_de_creation;
 
     public Groupe(List<Unite> unites, String nom, int cout) {
         this.unites = unites;
         this.nom = nom;
         this.cout = cout;
+        this.cout_lors_de_creation = cout;
     }
 
 
@@ -51,5 +53,9 @@ public class Groupe {
         else {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public int getCout_lors_de_creation() {
+        return cout_lors_de_creation;
     }
 }
