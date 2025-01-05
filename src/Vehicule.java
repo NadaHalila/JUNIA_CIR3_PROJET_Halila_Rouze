@@ -13,11 +13,11 @@ class Vehicule extends Unite {
 
     @Override
     public String toString() {
-        return "Vehicule{" +
-                "type='" + type + '\'' +
-                ", nom='" + nom + '\'' +
-                ", cout=" + cout +
-                '}';
+        return "Vehicule : " +
+                 type + " - " +
+                nom + " ( " +
+                 cout +
+                " pts ) ";
     }
 }
 

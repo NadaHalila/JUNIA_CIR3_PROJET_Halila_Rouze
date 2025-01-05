@@ -12,10 +12,10 @@ class Transport extends Vehicule  {
     @Override
     public String toString() {
         return "Transport : " +
-                 type + '-' +
-                 nom + '(' +
-                 cout + ',' +
+                 type + " - " +
+                 nom + " ( " +
+                 cout + " pts , " +
                  poid +
-                ')';
+                " ) ";
     }
 }
